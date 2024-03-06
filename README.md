@@ -14,7 +14,8 @@ The ESnapPop script provides a snapping popup with default modes.
 ## Installation
 
 1. Place the `ESnapPop.py` file in the `scripts` folder of your Maya directory.
-2. Assign a hotkey in Maya's Hotkey Editor:
+2. Place the SnapPopIcons folder in the `prefs/icons` folder of your Maya directory.
+3. Assign a hotkey in Maya's Hotkey Editor:
    
 ```python
 import ESnapPop
