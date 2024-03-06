@@ -20,7 +20,7 @@ class SnapButton(QtWidgets.QPushButton):
         }
 
     def mousePressEvent(self, event):
-        self.parent().check_alt()  # Check the alt key status
+        self.parent().check_alt()
         if event.button() == QtCore.Qt.RightButton:
             for button in self.parent().findChildren(SnapButton):
                 snap_mode_for_button = self.snap_modes[button.toolTip()]
@@ -33,12 +33,9 @@ class SnapButton(QtWidgets.QPushButton):
             self.parent().is_alt_pressed = QtWidgets.QApplication.keyboardModifiers() == QtCore.Qt.AltModifier
             super().mousePressEvent(event)
 
-
-
-
-class PopupWindow(QtWidgets.QDialog):
+class ESnapPopWindow(QtWidgets.QDialog):
     def __init__(self, parent=maya_main_window()):
-        super(PopupWindow, self).__init__(parent)
+        super(ESnapPopWindow, self).__init__(parent)
 
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.Tool)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
@@ -129,7 +126,7 @@ class PopupWindow(QtWidgets.QDialog):
                     cmds.snapMode(**{snap_mode: False})
                     button.setProperty("active", "false")
             else:
-                cmds.inViewMessage(amg=label + " On", pos='topCenter', fade=True)
+                cmds.inViewMessage(amg=label + " On", pos='topCenter', fade=True) 
                 cmds.snapMode(**{snap_mode: True})
                 if self.is_alt_pressed: 
                     for b in self.findChildren(QtWidgets.QPushButton):
@@ -206,7 +203,7 @@ def create_popup_window():
     global popup_window
     if popup_window is not None and popup_window.isVisible():
         popup_window.close()
-    popup_window = PopupWindow()
+    popup_window = ESnapPopWindow()
 
 popup_window = None
 
